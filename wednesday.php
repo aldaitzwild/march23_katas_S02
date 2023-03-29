@@ -22,3 +22,26 @@
     ['name' => 'Rocket Launcher', 'price' => 7800, 'VAT rate' => 0.20],
     ['name' => 'Computer', 'price' => 850, 'VAT rate' => 0.20],
  ];
+
+
+ echo 'Liste des articles en TTC : ' . PHP_EOL;
+ foreach($products as $product) {
+   echo $product['name'] . ' - ' . 
+         round($product['price'] * (1 + $product['VAT rate']), 2) .
+         '€ TTC' . PHP_EOL;
+ }
+
+
+ echo PHP_EOL . PHP_EOL . 'Liste des articles en TTC avec inflation : ' . PHP_EOL;
+ foreach($products as $product) {
+   $priceIncVAT = $product['price'] * (1 + $product['VAT rate']);
+
+   $inflationRate = 1.15;
+   if($priceIncVAT > 200) $inflationRate = 1.25;
+
+   $inflatedPrice = $priceIncVAT * $inflationRate;
+
+   echo $product['name'] . ' - ' . 
+         round($inflatedPrice, 2) .
+         '€ TTC' . PHP_EOL;
+ }
